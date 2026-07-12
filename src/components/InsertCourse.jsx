@@ -1,52 +1,118 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 const InsertCourse = () => {
-  return (
-    <div>
-      <div className="container">
-        <div className="row">
-            <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                <div className="row g-3">
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
 
-                        <label htmlFor="" className="form-label">Course Name</label>
-                        <input type="text" className="form-control" />
+    const [input, changeInput] = useState({
+        course: "",
+        duration: "",
+        fee: "",
+        mode: "",
+        trainer: ""
+    })
 
-                    </div>
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+    const inputHandler = (event) => {
+        changeInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+    }
 
-                        
-                        <label htmlFor="" className="form-label">Duration</label>
-                        <input type="text" className="form-control" />
+    const submitData = () => {
 
-                    </div>
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        console.log(input) // Teacher's first debugging step
 
-                        
-                        <label htmlFor="" className="form-label">Fee</label>
-                        <input type="text" className="form-control" />
-                    </div>
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        axios.post(
+            "https://host-demo-app.onrender.com/api/add-course",
+            input
+        )
+        .then((response) => {
+            console.log(response.data)
+            alert(response.data.message || "Course Added Successfully")
+        })
+        .catch((error) => {
+            console.log(error)
+            alert("Failed to Add Course")
+        })
+    }
 
-                        
-                        <label htmlFor="" className="form-label">Mode</label>
-                        <input type="text" className="form-control" />
-                    </div>
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+    return (
+        <div>
+            <div className="container">
+                <div className="row">
+                    <div className="col col-12">
+                        <div className="row g-3">
 
-                        
-                        <label htmlFor="" className="form-label">Trainer</label>
-                        <input type="text" className="form-control" />
-                    </div>
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                        <button className="btn btn-warning">Submit</button>
+                            <div className="col-12">
+                                <label className="form-label">Course Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="course"
+                                    value={input.course}
+                                    onChange={inputHandler}
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label">Duration</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="duration"
+                                    value={input.duration}
+                                    onChange={inputHandler}
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label">Fee</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="fee"
+                                    value={input.fee}
+                                    onChange={inputHandler}
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label">Mode</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="mode"
+                                    value={input.mode}
+                                    onChange={inputHandler}
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label">Trainer</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="trainer"
+                                    value={input.trainer}
+                                    onChange={inputHandler}
+                                />
+                            </div>
+
+                            <div className="col-12">
+                                <button
+                                    className="btn btn-warning"
+                                    onClick={submitData}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
-    </div>
-  )
+    )
 }
 
 export default InsertCourse
