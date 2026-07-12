@@ -1,22 +1,8 @@
-<<<<<<< HEAD
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import NavigationBar from './NavigationBar'
 
 const InsertCourse = () => {
-  return (
-    <div>
-        <NavigationBar/>
-      <div className="container">
-        <div className="row">
-            <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                <div className="row g-3">
-                    <div className="col col-12 col-sn-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-=======
-import React, { useState } from 'react'
-import axios from 'axios'
-
-const InsertCourse = () => {
->>>>>>> insertCourse
 
     const [input, changeInput] = useState({
         course: "",
@@ -35,7 +21,7 @@ const InsertCourse = () => {
 
     const submitData = () => {
 
-        console.log(input) // Teacher's first debugging step
+        console.log(input)
 
         axios.post(
             "https://host-demo-app.onrender.com/api/add-course",
@@ -53,9 +39,11 @@ const InsertCourse = () => {
 
     return (
         <div>
+            <NavigationBar />
+
             <div className="container">
                 <div className="row">
-                    <div className="col col-12">
+                    <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                         <div className="row g-3">
 
                             <div className="col-12">
